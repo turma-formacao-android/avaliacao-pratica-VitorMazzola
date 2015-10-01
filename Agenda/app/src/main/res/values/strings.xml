@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Agenda</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="msg_required">Field Required</string>
+    <string name="lbl_name">Name</string>
+    <string name="lbl_phone">Phone</string>
+    <string name="lbl_zipcode">Zip Code</string>
+    <string name="button_search">Search</string>
+    <string name="lbl_type">Street Type</string>
+    <string name="lbl_street">Street</string>
+    <string name="lbl_neighborhood">Neighborhood</string>
+    <string name="lbl_city">City</string>
+    <string name="lbl_state">State</string>
+    <string name="lbl_add">Add</string>
+    <string name="lbl_networking">Social Networking</string>
+    <string name="lbl_email">Email</string>
+
+</resources>
