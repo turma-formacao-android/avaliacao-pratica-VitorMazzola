@@ -23,4 +23,12 @@ public final class FormHelper {
 
         return hasRequired;
     }
+
+    public static void clearEditTextFields(EditText... fields){
+
+        for(EditText field : fields){
+            field.setText("");
+        }
+
+    }
 }

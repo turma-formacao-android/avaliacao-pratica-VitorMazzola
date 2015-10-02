@@ -10,25 +10,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/lbl_name"/>
 
-
-    <EditText
-        android:id="@+id/editTextPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/lbl_phone"/>
-
-    <EditText
-        android:id="@+id/editTextNetworking"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/lbl_networking"/>
-
-    <EditText
-        android:id="@+id/editTextEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/lbl_email"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,6 +57,62 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/lbl_state"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerPhone"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:id="@+id/button_savePhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_action_add"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerEmail"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:id="@+id/button_saveEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_action_add"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerSocialNetwork"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:id="@+id/button_saveSocialNetwork"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_action_add"/>
+
+    </LinearLayout>
 
 
 

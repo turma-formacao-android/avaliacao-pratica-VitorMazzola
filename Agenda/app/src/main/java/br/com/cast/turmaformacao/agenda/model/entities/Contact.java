@@ -6,39 +6,21 @@ import android.os.Parcelable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Contact implements Parcelable {
 
-    @JsonIgnore
     private Long id;
-
-    @JsonIgnore
     private String name;
-
-    @JsonProperty("cep")
-    private String zipCode;
-
-    @JsonProperty("tipoDeLogradouro")
-    private String type;
-
-    @JsonProperty("logradouro")
-    private String street;
-
-    @JsonProperty("bairro")
-    private String neighborhood;
-
-    @JsonProperty("cidade")
-    private String city;
-
-    @JsonProperty("estado")
-    private String state;
+    private Address address;
+    private Phone phone;
+    private Email email;
+    private SocialNetwork socialNetwork;
 
     public Contact() {
         super();
-    }
-
-    public Contact(Parcel in) {
-        super();
-        readFromParcel(in);
+        address = new Address();
     }
 
     public Long getId() {
@@ -53,62 +35,44 @@ public class Contact implements Parcelable {
         return name;
     }
 
-    public void setName(String nome) {
-        this.name = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getZipCode() {
-        return zipCode;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    public String getType() {
-        return type;
+    public Phone getPhone() {
+        return phone;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setPhone(Phone phone) {
+        this.phone = phone;
     }
 
-    public String getStreet() {
-        return street;
+    public Email getEmail() {
+        return email;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setEmail(Email email) {
+        this.email = email;
     }
 
-    public String getNeighborhood() {
-        return neighborhood;
+    public SocialNetwork getSocialNetwork() {
+        return socialNetwork;
     }
 
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
+    public void setSocialNetwork(SocialNetwork socialNetwork) {
+        this.socialNetwork = socialNetwork;
     }
 
     @Override
     public boolean equals(Object o) {
-
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -116,28 +80,22 @@ public class Contact implements Parcelable {
 
         if (id != null ? !id.equals(contact.id) : contact.id != null) return false;
         if (name != null ? !name.equals(contact.name) : contact.name != null) return false;
-        if (zipCode != null ? !zipCode.equals(contact.zipCode) : contact.zipCode != null)
+        if (address != null ? !address.equals(contact.address) : contact.address != null)
             return false;
-        if (type != null ? !type.equals(contact.type) : contact.type != null) return false;
-        if (street != null ? !street.equals(contact.street) : contact.street != null) return false;
-        if (neighborhood != null ? !neighborhood.equals(contact.neighborhood) : contact.neighborhood != null)
-            return false;
-        if (city != null ? !city.equals(contact.city) : contact.city != null) return false;
-        if (state != null ? !state.equals(contact.state) : contact.state != null) return false;
+        if (phone != null ? !phone.equals(contact.phone) : contact.phone != null) return false;
+        if (email != null ? !email.equals(contact.email) : contact.email != null) return false;
+        return !(socialNetwork != null ? !socialNetwork.equals(contact.socialNetwork) : contact.socialNetwork != null);
 
-        return true;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (zipCode != null ? zipCode.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (street != null ? street.hashCode() : 0);
-        result = 31 * result + (neighborhood != null ? neighborhood.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (state != null ? state.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (socialNetwork != null ? socialNetwork.hashCode() : 0);
         return result;
     }
 
@@ -146,12 +104,10 @@ public class Contact implements Parcelable {
         return "Contact{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", zipCode='" + zipCode + '\'' +
-                ", type='" + type + '\'' +
-                ", street='" + street + '\'' +
-                ", neighborhood='" + neighborhood + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
+                ", address=" + address +
+                ", phone=" + phone +
+                ", email=" + email +
+                ", socialNetwork=" + socialNetwork +
                 '}';
     }
 
@@ -165,27 +121,22 @@ public class Contact implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(this.id);
         dest.writeString(this.name);
-        dest.writeString(this.zipCode);
-        dest.writeString(this.type);
-        dest.writeString(this.street);
-        dest.writeString(this.neighborhood);
-        dest.writeString(this.city);
-        dest.writeString(this.state);
+        dest.writeParcelable(this.address, 0);
+        dest.writeParcelable(this.phone, 0);
+        dest.writeParcelable(this.email, 0);
+        dest.writeParcelable(this.socialNetwork, 0);
     }
 
-
-    public void readFromParcel(Parcel in){
+    protected Contact(Parcel in) {
         this.id = (Long) in.readValue(Long.class.getClassLoader());
         this.name = in.readString();
-        this.zipCode = in.readString();
-        this.type = in.readString();
-        this.street = in.readString();
-        this.neighborhood = in.readString();
-        this.city = in.readString();
-        this.state = in.readString();
+        this.address = in.readParcelable(Address.class.getClassLoader());
+        this.phone = in.readParcelable(Phone.class.getClassLoader());
+        this.email = in.readParcelable(Email.class.getClassLoader());
+        this.socialNetwork = in.readParcelable(SocialNetwork.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<Contact> CREATOR = new Parcelable.Creator<Contact>() {
+    public static final Creator<Contact> CREATOR = new Creator<Contact>() {
         public Contact createFromParcel(Parcel source) {
             return new Contact(source);
         }

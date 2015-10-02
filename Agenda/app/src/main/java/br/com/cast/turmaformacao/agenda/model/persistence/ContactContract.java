@@ -7,6 +7,7 @@ import android.database.Cursor;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.cast.turmaformacao.agenda.model.entities.Address;
 import br.com.cast.turmaformacao.agenda.model.entities.Contact;
 
 public final class ContactContract {
@@ -49,11 +50,11 @@ public final class ContactContract {
 
         values.put(ContactContract.ID, contact.getId());
         values.put(ContactContract.NAME, contact.getName());
-        values.put(ContactContract.STREET_TYPE, contact.getType());
-        values.put(ContactContract.STREET, contact.getStreet());
-        values.put(ContactContract.NEIGHBORHOOD, contact.getNeighborhood());
-        values.put(ContactContract.CITY, contact.getCity());
-        values.put(ContactContract.STATE, contact.getState());
+        values.put(ContactContract.STREET_TYPE, contact.getAddress().getType());
+        values.put(ContactContract.STREET, contact.getAddress().getStreet());
+        values.put(ContactContract.NEIGHBORHOOD, contact.getAddress().getNeighborhood());
+        values.put(ContactContract.CITY, contact.getAddress().getCity());
+        values.put(ContactContract.STATE, contact.getAddress().getState());
 
 
         return values;
@@ -64,13 +65,15 @@ public final class ContactContract {
 
         if (!cursor.isBeforeFirst() || cursor.moveToNext()) {
             Contact contact = new Contact();
+
+
             contact.setId(cursor.getLong(cursor.getColumnIndex(ContactContract.ID)));
             contact.setName(cursor.getString(cursor.getColumnIndex(ContactContract.NAME)));
-            contact.setType(cursor.getString(cursor.getColumnIndex(ContactContract.STREET_TYPE)));
-            contact.setStreet(cursor.getString(cursor.getColumnIndex(ContactContract.STREET)));
-            contact.setNeighborhood(cursor.getString(cursor.getColumnIndex(ContactContract.NEIGHBORHOOD)));
-            contact.setCity(cursor.getString(cursor.getColumnIndex(ContactContract.CITY)));
-            contact.setState(cursor.getString(cursor.getColumnIndex(ContactContract.STATE)));
+            contact.getAddress().setType(cursor.getString(cursor.getColumnIndex(ContactContract.STREET_TYPE)));
+            contact.getAddress().setStreet(cursor.getString(cursor.getColumnIndex(ContactContract.STREET)));
+            contact.getAddress().setNeighborhood(cursor.getString(cursor.getColumnIndex(ContactContract.NEIGHBORHOOD)));
+            contact.getAddress().setCity(cursor.getString(cursor.getColumnIndex(ContactContract.CITY)));
+            contact.getAddress().setState(cursor.getString(cursor.getColumnIndex(ContactContract.STATE)));
 
             return contact;
         }

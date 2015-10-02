@@ -14,5 +14,22 @@
     <string name="lbl_add">Add</string>
     <string name="lbl_networking">Rede Social</string>
     <string name="lbl_email">Email</string>
+    <string name="lbl_contact_add">Add</string>
+    <string name="lbl_menu_edit">Editar</string>
+    <string name="lbl_menu_delete">Deletar</string>
+    <string name="lbl_confirm">Confirma</string>
+    <string name="lbl_no">Não</string>
+    <string name="lbl_yes">Sim</string>
+    <string name="msg_confirm_delete">Deseja excluir este contato?</string>
+    <string name="msg_delete_sucessfull">Deletado com sucesso</string>
+    <string name="lbl_phonetype">Phone\'s type</string>
+    <string name="lbl_telephone">Telephone</string>
+    <string name="lbl_number">Number of phone</string>
+    <string name="button_saveNumber">Save</string>
+    <string name="lbl_editEmail">type the email</string>
+    <string name="button_saveEmail">Save</string>
+    <string name="lbl_saveEmail">Save</string>
+    <string name="lbl_savePhone">Save</string>
+
 
 </resources>

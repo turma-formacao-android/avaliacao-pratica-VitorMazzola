@@ -2,45 +2,59 @@ package br.com.cast.turmaformacao.agenda.model.http;
 
 import android.util.Log;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import br.com.cast.turmaformacao.agenda.model.entities.Address;
 import br.com.cast.turmaformacao.agenda.model.entities.Contact;
 
 public final class AddressService {
 
-    private static final String URL = "http://correiosapi.apphb.com/cep/";
+    private final static String URL = "http://correiosapi.apphb.com/cep/";
 
     private AddressService(){
         super();
     }
 
-    public static Contact getAddressByZipCode(String zipCode){
-        Contact contact = null;
+
+    public static Address getAdressByZipCode(String zipCode){
+
+        Address address = null;
 
         try {
-            java.net.URL url = new URL(URL + zipCode);
+            java.net.URL url = new java.net.URL(URL + zipCode);
             final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
 
             int responseCode = conn.getResponseCode();
-            Log.i("getAddressByCep", "Código de retorno da requisição de cep: " + responseCode);
-            if(responseCode == HttpURLConnection.HTTP_OK){
-                InputStream inputStream = conn.getInputStream();
 
-                ObjectMapper objectMapper = new ObjectMapper();
-                contact = objectMapper.readValue(inputStream, Contact.class);
-
+            if(responseCode != HttpURLConnection.HTTP_OK) {
+                throw new RuntimeException("Error code: " + responseCode);
             }
 
-        } catch (Exception e){
-            Log.e(AddressService.class.getName(), "" + e.getMessage());
+            InputStream inputStream = conn.getInputStream();
+
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+            address = objectMapper.readValue(inputStream, Address.class);
+
+
+
+            conn.disconnect();
+
+        } catch (Exception e) {
+
+            Log.e(e.getClass().toString(), e.getMessage());
         }
 
-        return contact;
+        return address;
     }
+
 }
